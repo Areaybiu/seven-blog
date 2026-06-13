@@ -1035,23 +1035,18 @@ home_top:
   timemode: date #date/updated
   title: 欢迎来到我的博客
   subTitle: 记录技术与金融的学习之路
-  siteText: anheyu.com
+  siteText: areay-blog.pages.dev
   category:
     - name: 技术
       path: /categories/技术/
       shadow: var(--anzhiyu-shadow-blue)
       class: blue
       icon: anzhiyu-icon-code
-    - name: 量化金融
-      path: /categories/量化金融/
+    - name: 量化
+      path: /categories/量化/
       shadow: var(--anzhiyu-shadow-red)
       class: red
       icon: anzhiyu-icon-chart-line
-    - name: 学习笔记
-      path: /categories/学习笔记/
-      shadow: var(--anzhiyu-shadow-green)
-      class: green
-      icon: anzhiyu-icon-book
   default_descr: 再怎么看我也不知道怎么描述它的啦！
   swiper:
     enable: false
