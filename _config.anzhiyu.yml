@@ -1041,15 +1041,20 @@ home_top:
       shadow: var(--anzhiyu-shadow-red)
       class: red
       icon: anzhiyu-icon-chart-line
+    - name: 生活
+      path: /categories/生活/
+      shadow: var(--anzhiyu-shadow-green)
+      class: green
+      icon: anzhiyu-icon-book
   default_descr: 再怎么看我也不知道怎么描述它的啦！
   swiper:
     enable: false
     swiper_css: https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css #swiper css依赖
     swiper_js: https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.js #swiper js依赖
   banner:
-    tips: 新品主题
-    title: Theme-AnZhiYu
-    image: https://bu.dusays.com/2023/05/13/645fa3cf90d70.webp
+    tips: 
+    title: 
+    image: 
     link:
 
 # 朋友圈配置
