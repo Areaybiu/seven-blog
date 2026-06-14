@@ -1,18 +1,18 @@
 /* ========== 全局背景图 + 内容区模糊效果 ========== */
 
-/* 1. 给整个页面设置背景图 */
-body {
+/* 1. 用 banner 图替换默认的纯色背景 */
+#web_bg {
   background: url(/img/banner.jpg) center center / cover no-repeat fixed !important;
 }
 
-/* 2. 内容区半透明 + 模糊 */
-#page {
-  background: rgba(247, 249, 254, 0.85) !important;
+/* 2. 内容区半透明 + 模糊（让背景图透出来并虚化） */
+#body-wrap {
+  background: rgba(247, 249, 254, 0.75) !important;
   backdrop-filter: saturate(180%) blur(20px) !important;
   -webkit-backdrop-filter: saturate(180%) blur(20px) !important;
 }
 
 /* 3. 深色模式适配 */
-[data-theme="dark"] #page {
-  background: rgba(24, 23, 29, 0.85) !important;
+[data-theme="dark"] #body-wrap {
+  background: rgba(24, 23, 29, 0.75) !important;
 }
