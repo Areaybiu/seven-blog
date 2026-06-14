@@ -1,8 +1,8 @@
-- class_name: 好朋友们
-  class_desc: 世界那么大，遇见你们真好
+- class_name: 好朋友
+  class_desc: 欢迎来访
   flink_style: anzhiyu
   flink_list:
     - name: Seven's Blog
       link: https://blog.oneiseven.top
       avatar: https://blog.oneiseven.top/avatar.png
-      descr: 欢迎来到 Seven 的博客
+      descr: Seven的博客
