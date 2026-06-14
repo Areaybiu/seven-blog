@@ -5,14 +5,19 @@
   background: url(/img/banner.jpg) center center / cover no-repeat fixed !important;
 }
 
-/* 2. 内容区半透明 + 模糊（让背景图透出来并虚化） */
-#body-wrap {
+/* 2. header 透明，让 #web_bg 清晰显示 */
+#page-header {
+  background: transparent !important;
+}
+
+/* 3. 内容区半透明 + 模糊 */
+#blog-container {
   background: rgba(247, 249, 254, 0.75) !important;
   backdrop-filter: saturate(180%) blur(20px) !important;
   -webkit-backdrop-filter: saturate(180%) blur(20px) !important;
 }
 
-/* 3. 深色模式适配 */
-[data-theme="dark"] #body-wrap {
+/* 4. 深色模式适配 */
+[data-theme="dark"] #blog-container {
   background: rgba(24, 23, 29, 0.75) !important;
 }
