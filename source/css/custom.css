@@ -21,3 +21,54 @@
 [data-theme="dark"] #blog-container {
   background: rgba(24, 23, 29, 0.82) !important;
 }
+
+/* ========== 移动端优化 ========== */
+@media screen and (max-width: 768px) {
+  /* 文章标题增加行高和间距 */
+  .recent-post-info .article-title {
+    line-height: 1.6 !important;
+    margin-bottom: 8px !important;
+  }
+
+  /* 文章卡片增加内边距 */
+  .recent-post-item {
+    padding: 16px !important;
+  }
+
+  /* 标签样式优化 */
+  .article-meta-wrap .article-meta-label {
+    font-size: 12px !important;
+    color: #666 !important;
+  }
+
+  /* 分类导航优化 */
+  #category-bar {
+    padding: 8px 12px !important;
+  }
+
+  /* 悬浮按钮位置优化 */
+  #rightside {
+    right: 12px !important;
+    bottom: 80px !important;
+  }
+
+  #rightside > div {
+    margin-bottom: 8px !important;
+  }
+
+  /* 侧边栏在移动端隐藏或优化 */
+  #aside-content {
+    margin-top: 20px !important;
+  }
+
+  /* 头图适配 */
+  #page-header.full_page {
+    height: 300px !important;
+  }
+
+  /* 标签云间距优化 */
+  .card-tag-cloud a {
+    margin: 4px !important;
+    padding: 4px 8px !important;
+  }
+}
