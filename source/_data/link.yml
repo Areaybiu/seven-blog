@@ -1,5 +1,6 @@
 - class_name: 好朋友们
   class_desc: 世界那么大，遇见你们真好
+  flink_style: flexcard
   flink_list:
     - name: Seven's Blog
       link: https://blog.oneiseven.top
