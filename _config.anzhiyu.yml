@@ -3,6 +3,7 @@ menu:
   归档: /archives/ || anzhiyu-icon-box-archive
   分类: /categories/ || anzhiyu-icon-shapes
   标签: /tags/ || anzhiyu-icon-tags
+  友链: /friends/ || anzhiyu-icon-link
   关于: /about/ || anzhiyu-icon-paper-plane
 
 # nav相关配置
