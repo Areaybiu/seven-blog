@@ -1,8 +1,9 @@
 - class_name: 好朋友
-  class_desc: 欢迎交流
-  flink_style: anzhiyu
+  class_desc: 世界那么大，遇见你们真好
+  flink_style: flexcard
   link_list:
     - name: Seven Blog
       link: https://blog.oneiseven.top
       avatar: https://blog.oneiseven.top/avatar.png
-      descr: Seven的博客
+      descr: Seven的博客，记录技术与生活
+      siteshot: https://blog.oneiseven.top
