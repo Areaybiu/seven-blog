@@ -1,7 +1,7 @@
 - class_name: 好朋友
   class_desc: 欢迎交流
   flink_style: anzhiyu
-  flink_list:
+  link_list:
     - name: Seven Blog
       link: https://blog.oneiseven.top
       avatar: https://blog.oneiseven.top/avatar.png
