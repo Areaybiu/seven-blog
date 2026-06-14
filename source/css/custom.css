@@ -10,14 +10,14 @@
   background: transparent !important;
 }
 
-/* 3. 内容区半透明 + 模糊 */
+/* 3. 内容区半透明 + 轻微模糊 */
 #blog-container {
-  background: rgba(247, 249, 254, 0.75) !important;
-  backdrop-filter: saturate(180%) blur(20px) !important;
-  -webkit-backdrop-filter: saturate(180%) blur(20px) !important;
+  background: rgba(247, 249, 254, 0.82) !important;
+  backdrop-filter: saturate(150%) blur(8px) !important;
+  -webkit-backdrop-filter: saturate(150%) blur(8px) !important;
 }
 
 /* 4. 深色模式适配 */
 [data-theme="dark"] #blog-container {
-  background: rgba(24, 23, 29, 0.75) !important;
+  background: rgba(24, 23, 29, 0.82) !important;
 }
