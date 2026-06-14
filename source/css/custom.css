@@ -1,0 +1,18 @@
+/* ========== 全局背景图 + 内容区模糊效果 ========== */
+
+/* 1. 给整个页面设置背景图 */
+body {
+  background: url(/img/banner.jpg) center center / cover no-repeat fixed !important;
+}
+
+/* 2. 内容区半透明 + 模糊 */
+#page {
+  background: rgba(247, 249, 254, 0.85) !important;
+  backdrop-filter: saturate(180%) blur(20px) !important;
+  -webkit-backdrop-filter: saturate(180%) blur(20px) !important;
+}
+
+/* 3. 深色模式适配 */
+[data-theme="dark"] #page {
+  background: rgba(24, 23, 29, 0.85) !important;
+}
