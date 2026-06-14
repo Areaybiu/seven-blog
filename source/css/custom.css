@@ -27,18 +27,44 @@
   /* 文章标题增加行高和间距 */
   .recent-post-info .article-title {
     line-height: 1.6 !important;
-    margin-bottom: 8px !important;
+    margin-bottom: 12px !important;
+    font-size: 16px !important;
   }
 
   /* 文章卡片增加内边距 */
   .recent-post-item {
-    padding: 16px !important;
+    padding: 20px !important;
+    margin-bottom: 16px !important;
   }
 
-  /* 标签样式优化 */
-  .article-meta-wrap .article-meta-label {
+  /* 文章元信息（标签、时间）优化 */
+  .recent-post-info .article-meta-wrap {
+    margin-top: 12px !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+
+  /* 文章标签样式 */
+  .recent-post-info .article-meta-wrap .article-meta-label {
     font-size: 12px !important;
     color: #666 !important;
+    margin-right: 8px !important;
+  }
+
+  /* 文章标签云 */
+  .recent-post-info .article-meta-wrap .article-tag {
+    margin-right: 6px !important;
+    margin-bottom: 6px !important;
+    font-size: 12px !important;
+  }
+
+  /* 文章时间 */
+  .recent-post-info .article-meta-wrap .post-meta-date {
+    font-size: 12px !important;
+    color: #999 !important;
+    margin-top: 4px !important;
+    width: 100% !important;
   }
 
   /* 分类导航优化 */
@@ -70,5 +96,22 @@
   .card-tag-cloud a {
     margin: 4px !important;
     padding: 4px 8px !important;
+  }
+
+  /* 首页文章列表优化 */
+  #recent-posts {
+    padding: 0 12px !important;
+  }
+
+  /* 文章封面图优化 */
+  .recent-post-item .post_cover {
+    margin-bottom: 12px !important;
+  }
+
+  /* 文章内容预览优化 */
+  .recent-post-info .content {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+    margin-top: 8px !important;
   }
 }
