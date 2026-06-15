@@ -14,7 +14,6 @@ description: 当 AI 开始写论文，如何保证学术诚信？ARS（Academic 
 
 ## 一、引言：AI 写论文的困境
 
-**[点击查看 ARS 流水线架构图](https://excalidraw.com/#json=M0kZi7rY55yT9U30Z5sUB,c0KT8bC8z9vI6caunqRzfg)**
 
 2026 年，Lu et al. 在 Nature 上发表了一篇里程碑式的论文：**The AI Scientist** —— 第一个通过盲审的全自动 AI 研究系统。
 
