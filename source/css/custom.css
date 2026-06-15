@@ -46,7 +46,25 @@
   /* 文章卡片整体优化 */
   #recent-posts .recent-post-item {
     margin-bottom: 16px !important;
-    padding: 12px !important;
+    min-height: auto !important;
+    height: auto !important;
+  }
+
+  /* 没有封面图的文章卡片 */
+  #recent-posts .recent-post-item .recent-post-info.no-cover {
+    padding: 20px !important;
+    position: relative !important;
+  }
+
+  /* 文章元信息 - 改成相对定位，避免覆盖标题 */
+  #recent-posts .recent-post-item .article-meta-wrap {
+    position: relative !important;
+    bottom: auto !important;
+    left: auto !important;
+    width: auto !important;
+    padding: 0 !important;
+    margin-top: 12px !important;
+    flex-direction: column !important;
   }
 
   /* 文章标题优化 */
@@ -54,10 +72,10 @@
     font-size: 17px !important;
     line-height: 1.6 !important;
     margin-bottom: 10px !important;
-    padding-right: 20px !important;
+    padding-right: 0 !important;
   }
 
-  /* 文章内容预览 - 限制行数 */
+  /* 文章内容预览 */
   #recent-posts .recent-post-item .content {
     font-size: 14px !important;
     line-height: 1.7 !important;
@@ -70,10 +88,20 @@
     margin-bottom: 12px !important;
   }
 
-  /* 文章元信息间距 */
-  #recent-posts .recent-post-item .article-meta-wrap {
-    margin-top: 12px !important;
-    margin-bottom: 10px !important;
+  /* 分类和标签信息 */
+  .recent-post-info-top-tips {
+    margin-bottom: 8px !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+  }
+
+  .article-categories-original {
+    font-size: 13px !important;
+  }
+
+  .unvisited-post {
+    font-size: 12px !important;
   }
 
   /* 文章标签样式 */
@@ -84,20 +112,16 @@
     display: inline-block !important;
   }
 
-  /* 分类和标签信息 */
-  .recent-post-info-top-tips {
-    margin-bottom: 8px !important;
+  /* 有封面图的文章 */
+  #recent-posts .recent-post-item .post_cover {
+    width: 100% !important;
+    height: 180px !important;
   }
 
-  .article-categories-original {
-    font-size: 13px !important;
-    margin-right: 8px !important;
-  }
-
-  /* 未读标签 */
-  .unvisited-post {
-    font-size: 12px !important;
-    margin-left: 8px !important;
+  #recent-posts .recent-post-item .post_cover img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
   }
 
   /* 侧边栏隐藏 */
