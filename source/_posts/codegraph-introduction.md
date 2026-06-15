@@ -8,7 +8,7 @@ tags:
   - 开源
 categories:
   - 技术
-cover: false
+
 description: 当 AI 编程助手需要理解你的代码时，它在做什么？CodeGraph 用预建知识图谱替代了低效的文件扫描，让 AI 从"翻遍所有书架"变成"查目录"。本文深入解析其技术原理、架构设计和实际效果。
 ---
 

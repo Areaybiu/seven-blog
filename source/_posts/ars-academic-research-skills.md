@@ -8,7 +8,7 @@ tags:
   - 开源
 categories:
   - 技术
-cover: false
+
 description: 当 AI 开始写论文，如何保证学术诚信？ARS（Academic Research Skills）用 10 阶段流水线、7 种失败模式检查、引用真实性验证，构建了一套"人机协作"的学术写作系统。本文深入解析其架构设计和背后的技术原理。
 ---
 
