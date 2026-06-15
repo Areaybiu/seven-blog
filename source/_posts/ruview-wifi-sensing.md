@@ -8,9 +8,8 @@ tags:
   - 开源
 categories:
   - 技术
-cover: false
+cover: https://ruview.pro/assets/hero-radar-D_1YuNHk.jpg
 description: 73.8k Stars 的开源项目，用 $9 的 ESP32 和普通 WiFi 信号，实现穿墙检测人体存在、呼吸、心率、跌倒检测——无需摄像头，无需可穿戴设备，只有物理学。
-mermaid: true
 ---
 
 ## 一、引言：WiFi 信号能"看穿"墙壁？
@@ -18,6 +17,8 @@ mermaid: true
 想象一下：你家的 WiFi 路由器正在向整个空间发射无线电波。当有人走动、呼吸、甚至静坐时，这些电波会被扰动——以可测量的方式。
 
 **RuView 就是利用这些扰动，把普通 WiFi 变成一个空间感知系统。**
+
+![RuView WiFi 感知系统](https://ruview.pro/assets/hero-radar-D_1YuNHk.jpg)
 
 - 检测房间里有没有人（穿墙）
 - 测量呼吸频率和心率（非接触）
@@ -67,6 +68,8 @@ mermaid: true
 
 WiFi 信号在空间中传播时，会被人、家具、墙壁等物体反射、衍射、散射。**CSI（Channel State Information）** 记录了这些信号的变化。
 
+### 3.2 系统架构
+
 ```mermaid
 graph LR
     A[WiFi 路由器] -->|无线电波| B[ESP32 传感器]
@@ -82,7 +85,7 @@ graph LR
     F --> J[活动识别]
 ```
 
-### 3.2 信号处理管道
+### 3.3 信号处理管道
 
 ```mermaid
 flowchart TD
@@ -97,7 +100,7 @@ flowchart TD
     H --> J[心率 BPM]
 ```
 
-### 3.3 菲涅尔区几何（Fresnel Zone Geometry）
+### 3.4 菲涅尔区几何（Fresnel Zone Geometry）
 
 WiFi 信号在空间中形成一系列椭圆形的菲涅尔区。当人体穿过这些区域时，信号会发生可预测的变化。
 
@@ -114,7 +117,7 @@ graph TB
     D -->|反射信号| F
 ```
 
-### 3.4 多频率网格扫描
+### 3.5 多频率网格扫描
 
 ```mermaid
 graph LR
@@ -146,6 +149,8 @@ graph LR
 ## 四、硬件方案
 
 ### 4.1 推荐方案：ESP32 + Cognitum Seed
+
+![RuView Seed 方案](https://github.com/ruvnet/RuView/raw/main/assets/ruview-seed.png)
 
 | 组件 | 成本 | 说明 |
 |------|------|------|
