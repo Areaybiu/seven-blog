@@ -151,11 +151,23 @@
           text-overflow: ellipsis;
           bottom: 0px;
           +maxWidth768()
-            bottom: 20px;
-        else 
+            position: relative
+            bottom: auto
+            left: auto
+            width: auto
+            padding: 0
+            margin-top: 10px
+        else
           flex-direction: row-reverse
           align-items: center
           bottom: 30px;
+          +maxWidth768()
+            position: relative
+            bottom: auto
+            left: auto
+            width: auto
+            padding: 0
+            margin-top: 10px
         .article-meta
           if hexo-config("post_meta.page.date_type") != 'both'
             margin: 0 8px 0 0;
