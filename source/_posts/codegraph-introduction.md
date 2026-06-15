@@ -14,6 +14,8 @@ description: 当 AI 编程助手需要理解你的代码时，它在做什么？
 
 ## 一、AI 编程助手的"探索税"
 
+**[点击查看 CodeGraph 架构图](https://excalidraw.com/#json=2htWq47jwu7VMxnTr5kV6,9j4KdhAuMk67UfRIBxvGPw)**
+
 当你在 Claude Code 里问「这个项目的认证流程是怎样的」，AI 会怎么做？
 
 ```
