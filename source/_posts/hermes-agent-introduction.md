@@ -8,11 +8,13 @@ tags:
   - 工具
 categories:
   - 技术
-cover: false
+cover: https://raw.githubusercontent.com/NousResearch/hermes-agent/main/assets/banner.png
 description: 大多数 AI Agent 用完就忘，Hermes Agent 却能越用越懂你。本文带你了解这个来自 Nous Research 的开源项目，看看它凭什么让圈子里讨论不停。
 ---
 
 ## 为什么大多数 AI Agent 用起来让人抓狂？
+
+![Hermes Agent](https://raw.githubusercontent.com/NousResearch/hermes-agent/main/assets/banner.png)
 
 你有没有过这种体验：
 
