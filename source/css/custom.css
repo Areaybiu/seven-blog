@@ -43,36 +43,61 @@
 
 /* ========== 移动端优化 ========== */
 @media screen and (max-width: 768px) {
+  /* 文章卡片整体优化 */
+  #recent-posts .recent-post-item {
+    margin-bottom: 16px !important;
+    padding: 12px !important;
+  }
+
   /* 文章标题优化 */
   #recent-posts .recent-post-item .article-title {
     font-size: 17px !important;
-    line-height: 1.5 !important;
-    -webkit-line-clamp: 2 !important;
-    margin-bottom: 8px !important;
+    line-height: 1.6 !important;
+    margin-bottom: 10px !important;
+    padding-right: 20px !important;
   }
 
   /* 文章内容预览 - 限制行数 */
   #recent-posts .recent-post-item .content {
-    font-size: 13px !important;
-    line-height: 1.6 !important;
+    font-size: 14px !important;
+    line-height: 1.7 !important;
     -webkit-line-clamp: 3 !important;
     display: -webkit-box !important;
     -webkit-box-orient: vertical !important;
     overflow: hidden !important;
     color: #666 !important;
-    margin-top: 8px !important;
+    margin-top: 10px !important;
+    margin-bottom: 12px !important;
   }
 
   /* 文章元信息间距 */
   #recent-posts .recent-post-item .article-meta-wrap {
-    margin-top: 10px !important;
-    margin-bottom: 8px !important;
+    margin-top: 12px !important;
+    margin-bottom: 10px !important;
   }
 
   /* 文章标签样式 */
   #recent-posts .recent-post-item .article-tag {
+    font-size: 13px !important;
+    margin-right: 8px !important;
+    margin-bottom: 4px !important;
+    display: inline-block !important;
+  }
+
+  /* 分类和标签信息 */
+  .recent-post-info-top-tips {
+    margin-bottom: 8px !important;
+  }
+
+  .article-categories-original {
+    font-size: 13px !important;
+    margin-right: 8px !important;
+  }
+
+  /* 未读标签 */
+  .unvisited-post {
     font-size: 12px !important;
-    margin-right: 6px !important;
+    margin-left: 8px !important;
   }
 
   /* 侧边栏隐藏 */
@@ -83,30 +108,34 @@
   /* 文章详情页 */
   #article-container {
     font-size: 16px !important;
-    line-height: 1.8 !important;
+    line-height: 1.9 !important;
+    letter-spacing: 0.5px !important;
   }
 
   #article-container p {
-    margin-bottom: 16px !important;
+    margin-bottom: 18px !important;
   }
 
   #article-container h2 {
-    font-size: 21px !important;
-    margin-top: 28px !important;
-    margin-bottom: 12px !important;
+    font-size: 22px !important;
+    margin-top: 30px !important;
+    margin-bottom: 14px !important;
+    line-height: 1.4 !important;
   }
 
   #article-container h3 {
     font-size: 18px !important;
-    margin-top: 20px !important;
-    margin-bottom: 10px !important;
+    margin-top: 22px !important;
+    margin-bottom: 12px !important;
+    line-height: 1.4 !important;
   }
 
   /* 代码块 */
   #article-container pre {
-    margin: 12px 0 !important;
-    padding: 12px !important;
+    margin: 14px 0 !important;
+    padding: 14px !important;
     font-size: 13px !important;
+    line-height: 1.5 !important;
     border-radius: 8px !important;
   }
 
@@ -114,6 +143,27 @@
   #article-container table {
     display: block !important;
     overflow-x: auto !important;
+    margin: 14px 0 !important;
+  }
+
+  #article-container table td,
+  #article-container table th {
+    padding: 10px 12px !important;
+    font-size: 14px !important;
+  }
+
+  /* 图片 */
+  #article-container img {
     margin: 12px 0 !important;
+    border-radius: 8px !important;
+  }
+
+  /* 引用块 */
+  #article-container blockquote {
+    margin: 14px 0 !important;
+    padding: 12px 16px !important;
+    border-left: 4px solid #1e90ff !important;
+    background: rgba(30, 144, 255, 0.05) !important;
+    border-radius: 0 8px 8px 0 !important;
   }
 }
