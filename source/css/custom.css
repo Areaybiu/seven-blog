@@ -43,85 +43,91 @@
 
 /* ========== 移动端优化 ========== */
 @media screen and (max-width: 768px) {
-  /* 文章卡片整体优化 */
-  #recent-posts .recent-post-item {
-    margin-bottom: 16px !important;
-    min-height: auto !important;
+  /* 文章卡片整体优化 - 强制覆盖主题样式 */
+  #recent-posts > .recent-post-item {
     height: auto !important;
+    min-height: auto !important;
+    flex-direction: column !important;
+    margin: 0 10px 16px 10px !important;
   }
 
   /* 没有封面图的文章卡片 */
-  #recent-posts .recent-post-item .recent-post-info.no-cover {
-    padding: 20px !important;
-    position: relative !important;
+  #recent-posts > .recent-post-item > .recent-post-info.no-cover {
+    padding: 16px !important;
+    width: 100% !important;
   }
 
-  /* 文章元信息 - 改成相对定位，避免覆盖标题 */
-  #recent-posts .recent-post-item .article-meta-wrap {
+  /* 文章元信息 - 强制改成相对定位，避免覆盖标题 */
+  #recent-posts > .recent-post-item > .recent-post-info > .article-meta-wrap,
+  #recent-posts > .recent-post-item > .recent-post-info.no-cover > .article-meta-wrap {
     position: relative !important;
     bottom: auto !important;
     left: auto !important;
     width: auto !important;
     padding: 0 !important;
-    margin-top: 12px !important;
-    flex-direction: column !important;
-  }
-
-  /* 文章标题优化 */
-  #recent-posts .recent-post-item .article-title {
-    font-size: 17px !important;
-    line-height: 1.6 !important;
-    margin-bottom: 10px !important;
-    padding-right: 0 !important;
-  }
-
-  /* 文章内容预览 */
-  #recent-posts .recent-post-item .content {
-    font-size: 14px !important;
-    line-height: 1.7 !important;
-    -webkit-line-clamp: 3 !important;
-    display: -webkit-box !important;
-    -webkit-box-orient: vertical !important;
-    overflow: hidden !important;
-    color: #666 !important;
     margin-top: 10px !important;
-    margin-bottom: 12px !important;
-  }
-
-  /* 分类和标签信息 */
-  .recent-post-info-top-tips {
-    margin-bottom: 8px !important;
-    display: flex !important;
+    flex-direction: row !important;
     flex-wrap: wrap !important;
     gap: 6px !important;
   }
 
-  .article-categories-original {
-    font-size: 13px !important;
+  /* 文章标题优化 */
+  #recent-posts > .recent-post-item .article-title {
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+    margin-bottom: 6px !important;
+    padding-right: 0 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
   }
 
-  .unvisited-post {
+  /* 分类和标签信息 */
+  .recent-post-info-top-tips {
+    margin-bottom: 6px !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 4px !important;
+  }
+
+  .article-categories-original {
     font-size: 12px !important;
   }
 
+  .unvisited-post {
+    font-size: 11px !important;
+  }
+
   /* 文章标签样式 */
-  #recent-posts .recent-post-item .article-tag {
-    font-size: 13px !important;
-    margin-right: 8px !important;
+  .article-tag {
+    font-size: 12px !important;
+    margin-right: 6px !important;
     margin-bottom: 4px !important;
-    display: inline-block !important;
   }
 
   /* 有封面图的文章 */
-  #recent-posts .recent-post-item .post_cover {
+  #recent-posts > .recent-post-item > .post_cover {
     width: 100% !important;
     height: 180px !important;
   }
 
-  #recent-posts .recent-post-item .post_cover img {
+  #recent-posts > .recent-post-item > .post_cover img {
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
+  }
+
+  /* 文章内容预览 */
+  #recent-posts > .recent-post-item .content {
+    font-size: 13px !important;
+    line-height: 1.6 !important;
+    -webkit-line-clamp: 2 !important;
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    color: #666 !important;
+    margin-top: 6px !important;
   }
 
   /* 侧边栏隐藏 */
@@ -132,62 +138,63 @@
   /* 文章详情页 */
   #article-container {
     font-size: 16px !important;
-    line-height: 1.9 !important;
-    letter-spacing: 0.5px !important;
+    line-height: 1.8 !important;
+    letter-spacing: 0.3px !important;
   }
 
   #article-container p {
-    margin-bottom: 18px !important;
+    margin-bottom: 16px !important;
   }
 
   #article-container h2 {
-    font-size: 22px !important;
-    margin-top: 30px !important;
-    margin-bottom: 14px !important;
+    font-size: 20px !important;
+    margin-top: 24px !important;
+    margin-bottom: 12px !important;
     line-height: 1.4 !important;
   }
 
   #article-container h3 {
-    font-size: 18px !important;
-    margin-top: 22px !important;
-    margin-bottom: 12px !important;
+    font-size: 17px !important;
+    margin-top: 18px !important;
+    margin-bottom: 10px !important;
     line-height: 1.4 !important;
   }
 
   /* 代码块 */
   #article-container pre {
-    margin: 14px 0 !important;
-    padding: 14px !important;
-    font-size: 13px !important;
+    margin: 12px 0 !important;
+    padding: 12px !important;
+    font-size: 12px !important;
     line-height: 1.5 !important;
     border-radius: 8px !important;
+    overflow-x: auto !important;
   }
 
   /* 表格可滚动 */
   #article-container table {
     display: block !important;
     overflow-x: auto !important;
-    margin: 14px 0 !important;
+    margin: 12px 0 !important;
   }
 
   #article-container table td,
   #article-container table th {
-    padding: 10px 12px !important;
-    font-size: 14px !important;
+    padding: 8px 10px !important;
+    font-size: 13px !important;
   }
 
   /* 图片 */
   #article-container img {
-    margin: 12px 0 !important;
+    max-width: 100% !important;
+    margin: 10px 0 !important;
     border-radius: 8px !important;
   }
 
   /* 引用块 */
   #article-container blockquote {
-    margin: 14px 0 !important;
-    padding: 12px 16px !important;
-    border-left: 4px solid #1e90ff !important;
-    background: rgba(30, 144, 255, 0.05) !important;
-    border-radius: 0 8px 8px 0 !important;
+    margin: 12px 0 !important;
+    padding: 10px 14px !important;
+    border-left: 3px solid #1e90ff !important;
+    border-radius: 0 6px 6px 0 !important;
   }
 }
