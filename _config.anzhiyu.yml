@@ -1052,10 +1052,10 @@ home_top:
     swiper_css: https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css #swiper css依赖
     swiper_js: https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.js #swiper js依赖
   banner:
-    tips: 
-    title: 
-    image: 
-    link:
+    tips: 推荐阅读
+    title: Hermes Agent：会"记住你"的 AI 智能体
+    image: https://raw.githubusercontent.com/NousResearch/hermes-agent/main/assets/banner.png
+    link: /2026/06/14/hermes-agent-introduction/
 
 # 朋友圈配置
 friends_vue:
