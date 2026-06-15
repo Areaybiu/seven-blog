@@ -5,9 +5,11 @@
   background: url(/img/banner.jpg) center center / cover no-repeat fixed !important;
 }
 
-/* 2. header 透明，让 #web_bg 清晰显示 */
-#page-header {
-  background: transparent !important;
+/* 2. 导航栏半透明深色背景，让文字清晰可见 */
+#page-header #nav {
+  background: rgba(0, 0, 0, 0.4) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
 }
 
 /* 3. 内容区半透明 + 轻微模糊 */
@@ -20,6 +22,12 @@
 /* 4. 深色模式适配 */
 [data-theme="dark"] #blog-container {
   background: rgba(24, 23, 29, 0.82) !important;
+}
+
+/* 5. 导航栏文字添加阴影，增强可读性 */
+#page-header #nav a,
+#page-header #nav .site-name {
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5) !important;
 }
 
 /* ========== 移动端优化 ========== */
