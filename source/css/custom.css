@@ -5,121 +5,226 @@
   background: url(/img/banner.jpg) center center / cover no-repeat fixed !important;
 }
 
-/* 2. 导航栏半透明深色背景，让文字清晰可见 */
+/* 2. 导航栏：白色半透明 + 毛玻璃效果，和动漫背景更配 */
 #page-header #nav {
-  background: rgba(0, 0, 0, 0.4) !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
+  background: rgba(255, 255, 255, 0.65) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* 导航栏文字改成深色 */
+#page-header #nav a,
+#page-header #nav .site-name {
+  color: #333 !important;
+  text-shadow: none !important;
 }
 
 /* 3. 内容区半透明 + 轻微模糊 */
 #blog-container {
-  background: rgba(247, 249, 254, 0.82) !important;
-  backdrop-filter: saturate(150%) blur(8px) !important;
-  -webkit-backdrop-filter: saturate(150%) blur(8px) !important;
+  background: rgba(255, 255, 255, 0.75) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
 }
 
 /* 4. 深色模式适配 */
+[data-theme="dark"] #page-header #nav {
+  background: rgba(30, 30, 30, 0.75) !important;
+}
+
+[data-theme="dark"] #page-header #nav a,
+[data-theme="dark"] #page-header #nav .site-name {
+  color: #eee !important;
+}
+
 [data-theme="dark"] #blog-container {
   background: rgba(24, 23, 29, 0.82) !important;
 }
 
-/* 5. 导航栏文字添加阴影，增强可读性 */
-#page-header #nav a,
-#page-header #nav .site-name {
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5) !important;
-}
-
 /* ========== 移动端优化 ========== */
 @media screen and (max-width: 768px) {
-  /* 文章标题增加行高和间距 */
-  .recent-post-info .article-title {
-    line-height: 1.6 !important;
-    margin-bottom: 12px !important;
-    font-size: 16px !important;
-  }
-
-  /* 文章卡片增加内边距 */
+  /* 文章卡片整体优化 */
   .recent-post-item {
-    padding: 20px !important;
-    margin-bottom: 16px !important;
+    padding: 16px !important;
+    margin: 0 8px 16px 8px !important;
+    border-radius: 12px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
   }
 
-  /* 文章元信息（标签、时间）优化 */
+  /* 文章封面图 */
+  .recent-post-item .post_cover {
+    margin: -16px -16px 12px -16px !important;
+    border-radius: 12px 12px 0 0 !important;
+    overflow: hidden !important;
+    height: 160px !important;
+  }
+
+  .recent-post-item .post_cover img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  /* 文章信息区域 */
+  .recent-post-info {
+    padding: 0 !important;
+  }
+
+  /* 文章标题 */
+  .recent-post-info .article-title {
+    font-size: 15px !important;
+    line-height: 1.5 !important;
+    margin-bottom: 8px !important;
+    display: -webkit-box !important;
+    -webkit-line-clips: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+
+  /* 文章元信息 */
   .recent-post-info .article-meta-wrap {
-    margin-top: 12px !important;
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 8px !important;
-  }
-
-  /* 文章标签样式 */
-  .recent-post-info .article-meta-wrap .article-meta-label {
+    margin-top: 8px !important;
+    margin-bottom: 8px !important;
     font-size: 12px !important;
-    color: #666 !important;
-    margin-right: 8px !important;
   }
 
-  /* 文章标签云 */
-  .recent-post-info .article-meta-wrap .article-tag {
+  /* 文章标签 */
+  .article-meta-wrap .article-tag {
+    display: inline-block !important;
     margin-right: 6px !important;
-    margin-bottom: 6px !important;
-    font-size: 12px !important;
+    margin-bottom: 4px !important;
+    padding: 2px 8px !important;
+    background: #f5f5f5 !important;
+    border-radius: 4px !important;
+    font-size: 11px !important;
+    color: #666 !important;
   }
 
-  /* 文章时间 */
-  .recent-post-info .article-meta-wrap .post-meta-date {
-    font-size: 12px !important;
-    color: #999 !important;
-    margin-top: 4px !important;
+  /* 文章内容预览 - 不要显示太多 */
+  .recent-post-info .content {
+    display: none !important;
+  }
+
+  /* 分类导航 */
+  #category-bar {
+    padding: 6px 12px !important;
+    margin-bottom: 12px !important;
+  }
+
+  #category-bar .category-bar-item {
+    padding: 4px 12px !important;
+    font-size: 13px !important;
+    margin-right: 6px !important;
+  }
+
+  /* 首页文章列表 */
+  #recent-posts {
+    padding: 0 4px !important;
+  }
+
+  /* 文章列表双列改单列 */
+  #recent-posts > .recent-post-item {
     width: 100% !important;
   }
 
-  /* 分类导航优化 */
-  #category-bar {
-    padding: 8px 12px !important;
+  /* 侧边栏 */
+  #aside-content {
+    display: none !important;
   }
 
-  /* 悬浮按钮位置优化 */
+  /* 悬浮按钮 */
   #rightside {
-    right: 12px !important;
-    bottom: 80px !important;
+    right: 8px !important;
+    bottom: 70px !important;
   }
 
   #rightside > div {
-    margin-bottom: 8px !important;
+    margin-bottom: 6px !important;
   }
 
-  /* 侧边栏在移动端隐藏或优化 */
-  #aside-content {
-    margin-top: 20px !important;
+  #rightside button {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 14px !important;
   }
 
-  /* 头图适配 */
+  /* 头图高度 */
   #page-header.full_page {
-    height: 300px !important;
+    height: 260px !important;
+    min-height: 260px !important;
   }
 
-  /* 标签云间距优化 */
-  .card-tag-cloud a {
-    margin: 4px !important;
-    padding: 4px 8px !important;
-  }
-
-  /* 首页文章列表优化 */
-  #recent-posts {
+  /* 文章详情页优化 */
+  #post {
     padding: 0 12px !important;
   }
 
-  /* 文章封面图优化 */
-  .recent-post-item .post_cover {
+  #post .article-title {
+    font-size: 20px !important;
+    line-height: 1.4 !important;
     margin-bottom: 12px !important;
   }
 
-  /* 文章内容预览优化 */
-  .recent-post-info .content {
+  /* 文章内容 */
+  #article-container {
+    font-size: 15px !important;
+    line-height: 1.8 !important;
+  }
+
+  #article-container p {
+    margin-bottom: 16px !important;
+  }
+
+  #article-container h2 {
+    font-size: 20px !important;
+    margin-top: 28px !important;
+    margin-bottom: 12px !important;
+  }
+
+  #article-container h3 {
+    font-size: 17px !important;
+    margin-top: 20px !important;
+    margin-bottom: 10px !important;
+  }
+
+  /* 代码块 */
+  #article-container pre {
+    margin: 12px 0 !important;
+    padding: 12px !important;
+    font-size: 13px !important;
+    border-radius: 8px !important;
+  }
+
+  /* 表格 */
+  #article-container table {
+    display: block !important;
+    overflow-x: auto !important;
+    margin: 12px 0 !important;
+    font-size: 13px !important;
+  }
+
+  /* 标签云 */
+  .card-tag-cloud a {
+    display: inline-block !important;
+    margin: 3px !important;
+    padding: 4px 10px !important;
+    font-size: 12px !important;
+    background: #f5f5f5 !important;
+    border-radius: 6px !important;
+  }
+
+  /* 归档页面 */
+  .article-sort {
+    padding: 0 !important;
+  }
+
+  .article-sort-item {
+    padding: 12px 0 !important;
+    border-bottom: 1px solid #eee !important;
+  }
+
+  .article-sort-item-title {
     font-size: 14px !important;
-    line-height: 1.6 !important;
-    margin-top: 8px !important;
+    line-height: 1.4 !important;
   }
 }
