@@ -1,6 +1,6 @@
 ---
 title: OpenWA：免费开源的 WhatsApp API 网关，自己掌控消息基础设施
-date: 2026-06-14 10:00:00
+date: 2026-06-17 17:00:00
 tags:
   - 开源
   - API
