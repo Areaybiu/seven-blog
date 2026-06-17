@@ -1,216 +1,196 @@
 ---
-title: MCP 协议：给 AI 装上"万能接口"，终于不用每个工具都写适配器了
+title: MCP 协议到底是什么？用外卖平台的故事讲清楚
 date: 2026-06-17 17:30:00
 tags:
   - AI
   - MCP
   - 开发工具
-  - Agent
 categories:
   - 技术
 cover: https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800
 ---
 
-你有没有这种体验：想让 AI 帮你查个数据库，得写一套适配器；想让它调用公司内部 API，又得写一套；想让它读个文件，还得写一套。每个 AI 工具（Claude、GPT、Gemini）的接口都不一样，同样的功能要重复开发 N 遍。
+你有没有点过外卖？美团、饿了么这些平台，连接了你和无数餐厅。你不需要知道每家餐厅的厨房在哪、厨师是谁、食材从哪来——你只需要在 App 上点餐，外卖小哥就会把饭送到你手上。
+
+MCP 协议做的事情，就是给 AI 装上一个"外卖平台"。
 
 <!-- more -->
 
-## 痛点：AI 工具集成的困境
+## 先说一个真实的痛点
 
-现在的 AI 应用开发，面临一个尴尬的现实：
+假设你是一个开发者，想让 AI 帮你做这些事：
 
-1. **每个 AI 模型都有自己的工具调用方式**：Claude 用 Tool Use，GPT 用 Function Calling，Gemini 用 Extensions，格式各不相同
-2. **每个外部服务都要写适配器**：数据库、API、文件系统、Git... 每个都要写一套代码
-3. **重复劳动严重**：同样的"读文件"功能，给 Claude 写一遍，给 GPT 又写一遍
-4. **维护成本高**：AI 模型升级了，适配器可能要重写
+- 查一下公司数据库里有多少用户
+- 读取本地的一个配置文件
+- 调用天气 API 看明天天气
+- 操作 Git 提交代码
 
-这就像早期的手机充电器——每家厂商一个接口，出门得带一堆线。
+**没有 MCP 之前**，你需要：
 
-## MCP：AI 世界的 USB-C
+1. 为 Claude 写一套数据库查询代码
+2. 为 GPT 写一套文件读取代码
+3. 为 Gemini 写一套 API 调用代码
+4. 每个 AI 模型都要单独适配，格式还不一样
 
-**MCP（Model Context Protocol，模型上下文协议）** 是 Anthropic 在 2024 年 11 月推出的开放标准，目标很简单：**让 AI 应用和外部工具之间的通信标准化**。
+这就像——你想点外卖，但美团只能点麦当劳，饿了么只能点肯德基，想吃火锅得再装一个 App。每个平台都有自己的规则，餐厅要为每个平台单独对接。
 
-你可以把 MCP 理解为 **AI 世界的 USB-C 接口**：
+**有了 MCP 之后**：
 
-- **USB-C 之前**：每个设备一个充电口，混乱不堪
-- **USB-C 之后**：一个接口搞定所有设备，统一标准
+1. 写一个"数据库 MCP Server"
+2. 所有 AI 模型都能用它查数据库
+3. 不用重复开发，不用适配不同格式
 
-MCP 对 AI 应用做的就是这件事——定义一套标准协议，让 AI 模型可以用同一种方式调用各种外部工具。
+这就像——有了统一的外卖平台标准，餐厅只需要对接一次，所有平台都能点它的餐。
 
-## MCP 的核心架构
-
-MCP 采用 **客户端-服务器架构**，有三个核心角色：
+## 用一张图说清楚
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                      Host（宿主应用）                        │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │              MCP Client（MCP 客户端）                │   │
-│  │         负责与 MCP Server 建立连接和通信              │   │
-│  └─────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              │ 标准化协议（JSON-RPC 2.0）
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│                   MCP Server（MCP 服务器）                   │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐        │
-│  │   Tools     │  │  Resources  │  │  Prompts    │        │
-│  │   工具      │  │   资源      │  │   提示词    │        │
-│  └─────────────┘  └─────────────┘  └─────────────┘        │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-                    ┌─────────────────┐
-                    │   外部服务/工具   │
-                    │  数据库、API、   │
-                    │  文件系统、Git   │
-                    └─────────────────┘
+┌─────────────────────────────────────────────────────────┐
+│                    你（用户）                            │
+│                      ↓ 提问                              │
+│  ┌───────────────────────────────────────────────────┐  │
+│  │              AI 应用（Claude/GPT/Gemini）          │  │
+│  │                        ↓                           │  │
+│  │              MCP Client（内置的"外卖小哥"）         │  │
+│  └───────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────┘
+                         │
+                         │ "我要查数据库"（标准协议）
+                         ↓
+┌─────────────────────────────────────────────────────────┐
+│              MCP Server（"餐厅"）                        │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐     │
+│  │ 数据库查询   │  │ 文件读取     │  │ API 调用    │     │
+│  │   Server    │  │   Server    │  │   Server    │     │
+│  └─────────────┘  └─────────────┘  └─────────────┘     │
+└─────────────────────────────────────────────────────────┘
+                         │
+                         ↓
+              ┌─────────────────────┐
+              │  真正的数据/服务     │
+              │  数据库、文件、API   │
+              └─────────────────────┘
 ```
 
-### 三个核心角色
+**翻译成人话**：
 
-| 角色 | 说明 | 例子 |
-|------|------|------|
-| **Host（宿主）** | 运行 AI 模型的应用 | Claude Desktop、Cursor、你的自定义应用 |
-| **MCP Client** | 客户端，负责与 Server 通信 | 内置在 Host 中，一个 Host 可以有多个 Client |
-| **MCP Server** | 服务器，提供具体功能 | 文件系统 Server、数据库 Server、GitHub Server |
+- **你**：问 AI "帮我查一下数据库有多少用户"
+- **AI 应用**：收到问题，调用 MCP Client
+- **MCP Client**：像外卖小哥一样，去找对应的 MCP Server
+- **MCP Server**：像餐厅一样，执行真正的操作（查数据库）
+- **结果**：返回给你"有 1024 个用户"
 
-### 三大能力
+## 三个核心概念
 
-MCP Server 可以提供三种类型的能力：
+MCP 里有三个角色，用外卖平台来理解：
 
-#### 1. Tools（工具）
-让 AI 可以执行操作，比如：
-- 查询数据库
-- 调用 API
-- 发送邮件
-- 执行代码
+### 1. Host（宿主）= 外卖平台 App
+
+就是你用的 AI 应用，比如：
+- Claude Desktop
+- Cursor（代码编辑器）
+- 你用代码写的 AI 程序
+
+它负责运行 AI 模型，管理 MCP Client。
+
+### 2. MCP Client（客户端）= 外卖小哥
+
+负责在 AI 应用和 MCP Server 之间传递消息。每个 Client 连接一个 Server。
+
+就像外卖小哥：接单 → 取餐 → 送餐。
+
+### 3. MCP Server（服务器）= 餐厅
+
+提供具体的功能。比如：
+- 数据库 Server：可以查询数据库
+- 文件系统 Server：可以读写文件
+- GitHub Server：可以操作 Git 仓库
+
+每个 Server 专注做一件事，做好做精。
+
+## MCP Server 能提供什么？
+
+一个 MCP Server 可以提供三种能力：
+
+### 1. Tools（工具）= 菜品
+
+让 AI 可以**执行操作**。就像餐厅提供的菜品，你可以点（调用）。
 
 ```json
 {
-  "name": "query_database",
-  "description": "查询 PostgreSQL 数据库",
-  "inputSchema": {
-    "type": "object",
-    "properties": {
-      "sql": {
-        "type": "string",
-        "description": "SQL 查询语句"
-      }
-    }
+  "name": "查询用户数量",
+  "description": "查询数据库中的用户总数",
+  "需要的参数": {
+    "表名": "users"
   }
 }
 ```
 
-#### 2. Resources（资源）
-让 AI 可以读取数据，比如：
-- 读取文件内容
-- 获取数据库表结构
-- 读取配置信息
+AI 可以说："帮我调用'查询用户数量'这个工具"。
+
+### 2. Resources（资源）= 食材清单
+
+让 AI 可以**读取数据**。就像餐厅的食材清单，你可以查看（读取）。
 
 ```json
 {
-  "uri": "file:///path/to/file.txt",
-  "name": "配置文件",
-  "description": "应用的配置文件",
-  "mimeType": "text/plain"
+  "uri": "数据库://users 表",
+  "name": "用户表",
+  "description": "包含所有用户信息"
 }
 ```
 
-#### 3. Prompts（提示词）
-预定义的提示词模板，比如：
-- 代码审查模板
-- 数据分析模板
-- 报告生成模板
+AI 可以说："让我看看用户表里有什么字段"。
 
-## 实际例子：用 MCP 连接数据库
+### 3. Prompts（提示词）= 推荐菜单
 
-假设你想让 Claude 查询你的 PostgreSQL 数据库，传统方式需要写一堆适配代码。用 MCP，只需要几行配置：
+预定义的**提示词模板**。就像餐厅的推荐套餐，直接用就行。
 
-### 1. 安装 MCP Server
+```json
+{
+  "name": "数据分析模板",
+  "description": "帮你分析数据并生成报告",
+  "参数": ["数据表名", "分析维度"]
+}
+```
+
+AI 可以说："用数据分析模板，帮我分析用户表"。
+
+## 实际例子：5 分钟搭建一个 MCP Server
+
+假设你想让 AI 可以查询天气，只需要几步：
+
+### 第一步：创建项目
 
 ```bash
-# 安装 PostgreSQL MCP Server
-npm install -g @modelcontextprotocol/server-postgres
+mkdir weather-mcp-server
+cd weather-mcp-server
+npm init -y
+npm install @modelcontextprotocol/sdk
 ```
 
-### 2. 配置 Claude Desktop
+### 第二步：写代码
 
-在 `claude_desktop_config.json` 中添加：
-
-```json
-{
-  "mcpServers": {
-    "postgres": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-postgres",
-        "postgresql://localhost:5432/mydb"
-      ]
-    }
-  }
-}
-```
-
-### 3. 直接使用
-
-配置完成后，你可以直接对 Claude 说：
-
-> "帮我查询 users 表中有多少活跃用户"
-
-Claude 会自动调用 MCP Server 执行 SQL 查询，返回结果。**不需要写任何适配代码**。
-
-## MCP 的优势
-
-| 优势 | 说明 |
-|------|------|
-| 🔌 **标准化** | 一次开发，到处使用。同一个 MCP Server 可以被 Claude、GPT、Gemini 等任何支持 MCP 的 AI 使用 |
-| 🔒 **安全性** | 权限控制在 Server 端，AI 不能直接访问敏感数据 |
-| 🧩 **模块化** | 每个功能独立一个 Server，按需组合 |
-| 🔄 **可复用** | 社区已经有大量现成的 MCP Server，直接用 |
-| 📈 **可扩展** | 需要新功能？写一个新的 MCP Server 就行 |
-
-## 现有的 MCP Server 生态
-
-社区已经开发了大量的 MCP Server：
-
-| Server | 功能 | GitHub Stars |
-|--------|------|--------------|
-| **filesystem** | 文件系统读写 | 1.2k+ |
-| **postgres** | PostgreSQL 数据库 | 800+ |
-| **github** | GitHub API 集成 | 1.5k+ |
-| **slack** | Slack 消息发送 | 600+ |
-| **google-drive** | Google Drive 文件 | 400+ |
-| **brave-search** | 网络搜索 | 700+ |
-
-完整列表：https://github.com/modelcontextprotocol/servers
-
-## 如何开发自己的 MCP Server
-
-用 TypeScript 开发一个简单的 MCP Server：
-
-```typescript
+```javascript
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 
-// 创建 MCP Server
+// 1. 创建服务器
 const server = new Server(
-  { name: "my-server", version: "1.0.0" },
+  { name: "weather-server", version: "1.0.0" },
   { capabilities: { tools: {} } }
 );
 
-// 注册工具
+// 2. 注册工具：告诉 AI "我能做什么"
 server.setRequestHandler("tools/list", async () => ({
   tools: [
     {
       name: "get_weather",
-      description: "获取天气信息",
+      description: "获取指定城市的天气",
       inputSchema: {
         type: "object",
         properties: {
-          city: { type: "string", description: "城市名称" }
+          city: { type: "string", description: "城市名称，比如"北京"" }
         },
         required: ["city"]
       }
@@ -218,63 +198,96 @@ server.setRequestHandler("tools/list", async () => ({
   ]
 }));
 
-// 处理工具调用
+// 3. 处理调用：AI 调用时，真正执行的代码
 server.setRequestHandler("tools/call", async (request) => {
   const { name, arguments: args } = request.params;
   
   if (name === "get_weather") {
-    const weather = await fetchWeather(args.city);
+    // 这里可以调用真实的天气 API
+    const weather = {
+      city: args.city,
+      temperature: "25°C",
+      condition: "晴天"
+    };
     return {
-      content: [{ type: "text", text: JSON.stringify(weather) }]
+      content: [{ type: "text", text: JSON.stringify(weather, null, 2) }]
     };
   }
 });
 
-// 启动服务器
+// 4. 启动服务器
 const transport = new StdioServerTransport();
 await server.connect(transport);
 ```
 
-## MCP 与其他方案对比
+### 第三步：配置 AI 应用
 
-| 对比项 | MCP | Function Calling | 自定义适配器 |
-|--------|-----|------------------|--------------|
-| 标准化 | ✅ 统一标准 | ❌ 各模型不同 | ❌ 完全自定义 |
-| 可复用 | ✅ 一次开发 | ❌ 每个模型重写 | ❌ 无法复用 |
-| 生态 | ✅ 社区丰富 | ⚠️ 依赖厂商 | ❌ 无 |
-| 安全性 | ✅ Server 端控制 | ⚠️ 取决于实现 | ⚠️ 取决于实现 |
-| 学习成本 | ⚠️ 中等 | ✅ 低 | ⚠️ 高 |
+在 Claude Desktop 的配置文件中添加：
 
-## 适用场景
+```json
+{
+  "mcpServers": {
+    "weather": {
+      "command": "node",
+      "args": ["/path/to/weather-server/index.js"]
+    }
+  }
+}
+```
 
-1. **企业内部 AI 助手**：连接内部数据库、API、文档系统
-2. **开发工具集成**：让 AI 可以操作 Git、Jira、CI/CD
-3. **数据分析平台**：AI 直接查询数据库，生成报告
-4. **自动化工作流**：AI 调用各种 API 完成复杂任务
+### 第四步：使用
 
-## 注意事项
+重启 Claude Desktop，然后你就可以说：
 
-⚠️ **安全第一**：MCP Server 可以执行操作，务必做好权限控制
+> "帮我查一下北京今天天气怎么样"
 
-⚠️ **性能考虑**：MCP Server 是独立进程，频繁调用会有延迟
+Claude 会自动调用你的天气 MCP Server，返回结果。
 
-⚠️ **版本兼容**：MCP 协议还在快速迭代，注意版本兼容性
+## MCP vs 其他方案
+
+| 场景 | 没有 MCP | 有 MCP |
+|------|----------|--------|
+| 给 Claude 加数据库功能 | 写一套 Claude 适配代码 | 用现成的数据库 MCP Server |
+| 给 GPT 加同样的功能 | 再写一套 GPT 适配代码 | 同一个 Server，直接能用 |
+| 换一个新的 AI 模型 | 再写一套适配代码 | 同一个 Server，直接能用 |
+| 维护成本 | N 套代码要维护 | 1 套代码搞定 |
+
+## 为什么 MCP 很重要？
+
+**1. 开发者不用重复造轮子**
+
+社区已经有大量现成的 MCP Server：
+- 文件系统、数据库、GitHub、Slack、Google Drive...
+- 你只需要配置，不用写代码
+
+**2. AI 应用更容易扩展功能**
+
+想让 AI 能操作新服务？装个 MCP Server 就行。
+
+**3. 安全可控**
+
+MCP Server 运行在本地，数据不经过第三方。你可以控制 AI 能访问什么、不能访问什么。
+
+## 哪些 AI 应用支持 MCP？
+
+目前支持 MCP 的应用：
+
+- **Claude Desktop**：Anthropic 官方支持
+- **Cursor**：代码编辑器，内置 MCP 支持
+- **Windsurf**：代码编辑器
+- **Cline**：VS Code 插件
+- **自定义应用**：用 MCP SDK 自己开发
 
 ## 总结
 
-MCP 解决了 AI 工具集成的核心痛点——**标准化**。
+MCP 解决了一个简单但重要的问题：**让 AI 能用统一的方式调用各种外部工具**。
 
-以前：
-- 每个 AI 模型一套工具调用方式
-- 每个外部服务一套适配代码
-- 维护成本高，复用性差
+以前：每个 AI 模型一套规则，每个工具一套适配，混乱不堪。
+现在：一个标准，所有 AI 都能用，所有工具都能接。
 
-现在：
-- 一个 MCP Server，所有 AI 都能用
-- 社区已有大量现成 Server，开箱即用
-- 专注业务逻辑，不用重复造轮子
+就像 USB-C 统一了充电接口，MCP 正在统一 AI 的工具调用接口。
 
-如果你正在开发 AI 应用，MCP 值得深入了解。它可能成为 AI 工具集成的事实标准。
+如果你想让 AI 能做更多事情，MCP 是目前最好的方案。
 
 ---
 
@@ -282,4 +295,4 @@ MCP 解决了 AI 工具集成的核心痛点——**标准化**。
 
 **GitHub**：https://github.com/modelcontextprotocol
 
-**Server 列表**：https://github.com/modelcontextprotocol/servers
+**MCP Server 列表**：https://github.com/modelcontextprotocol/servers
